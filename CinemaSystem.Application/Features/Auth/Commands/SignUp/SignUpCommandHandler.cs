@@ -21,7 +21,7 @@ namespace CinemaSystem.Application.Features.Auth.Commands.SignUp
         {
             var passwordHash = _passwordHasher.Secure(request.Password);
 
-            var Username = new UserName(request.Username);
+            var Username = new Username(request.Username);
             var HashPassword = new Password(passwordHash);
             var Email = new Email(request.Email);
             var FirstName = new FirstName(request.FirstName);

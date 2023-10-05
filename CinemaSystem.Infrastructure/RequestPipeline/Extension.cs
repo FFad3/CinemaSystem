@@ -6,7 +6,7 @@ namespace CinemaSystem.Infrastructure.RequestPipeline
 {
     internal static class Extension
     {
-        public const string SectionName = "MediatRPieline";
+        private const string SectionName = "MediatRPieline";
         internal static IServiceCollection ConfigureMediatRPipeline(this IServiceCollection services, IConfiguration configuration)
         {
             var config = configuration.GetOptions<PipelineConfiguration>(SectionName);
