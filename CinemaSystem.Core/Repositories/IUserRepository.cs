@@ -1,13 +1,14 @@
 ﻿using CinemaSystem.Core.Entities;
+using CinemaSystem.Core.ValueObjects;
 
 namespace CinemaSystem.Core.Repositories
 {
     public interface IUserRepository
     {
-        Task<User> GetByEmailAsync(string email, CancellationToken cancellationToken);
+        Task<User> GetByEmailAsync(Email email, CancellationToken cancellationToken);
 
-        Task<User> GetByUserNameAsync(string userName, CancellationToken cancellationToken);
+        Task<User> GetByUserNameAsync(UserName userName, CancellationToken cancellationToken);
 
-        Task<User> CreateAsync(User newUser, CancellationToken cancellationToken);
+        Task CreateAsync(User newUser, CancellationToken cancellationToken);
     }
 }
