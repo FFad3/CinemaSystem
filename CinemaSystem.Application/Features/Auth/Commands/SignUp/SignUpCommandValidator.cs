@@ -1,11 +1,15 @@
-﻿using FluentValidation;
+﻿using CinemaSystem.Core.Repositories;
+using FluentValidation;
 
 namespace CinemaSystem.Application.Features.Auth.Commands.SignUp
 {
-    internal class SignUpCommandValidator : AbstractValidator<SignUp>
+    public sealed class SignUpCommandValidator : AbstractValidator<SignUp>
     {
-        public SignUpCommandValidator()
+        private readonly IUserRepository _userRepository;
+        public SignUpCommandValidator(IUserRepository userRepository)
         {
+            _userRepository = userRepository;
+
             RuleFor(x => x.Username).NotEmpty();
             RuleFor(x => x.Password).NotEmpty();
             RuleFor(x => x.FirstName).NotEmpty();

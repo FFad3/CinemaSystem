@@ -30,9 +30,9 @@ namespace CinemaSystem.Application.Features.Auth.Commands.SignUp
 
             var newUser = new User(UserId, Username, HashPassword, FirstName, LastName, Email);
 
-            var createdUser = await _userRepository.CreateAsync(newUser, cancellationToken);
+            await _userRepository.CreateAsync(newUser, cancellationToken);
 
-            return createdUser;
+            return newUser;
         }
     }
 }

@@ -8,12 +8,13 @@ namespace CinemaSystem.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            var currrentAssembly = Assembly.GetExecutingAssembly();
+            services.AddValidatorsFromAssembly(currrentAssembly);
+            services.AddAutoMapper(currrentAssembly);
 
             services.AddMediatR(cfg =>
             {
-                cfg.RegisterServicesFromAssemblies();
+                cfg.RegisterServicesFromAssemblies(currrentAssembly);
             });
 
             return services;
