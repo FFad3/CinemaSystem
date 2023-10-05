@@ -1,12 +1,16 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CinemaSystem.Infrastructure.RequestPipeline
 {
-    internal static partial class Extension
+    internal static class Extension
     {
-        internal static IServiceCollection ConfigureRequestPipeline(this IServiceCollection services, PipelineConfiguration config)
+        public const string SectionName = "MediatRPieline";
+        internal static IServiceCollection ConfigureMediatRPipeline(this IServiceCollection services, IConfiguration configuration)
         {
+            var config = configuration.GetOptions<PipelineConfiguration>(SectionName);
+
             services.ConfigureRequestPipeline(cfg =>
             {
                 cfg.PereformenceLogging = config.PereformenceLogging;
@@ -37,6 +41,13 @@ namespace CinemaSystem.Infrastructure.RequestPipeline
                 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ResultLoggingBehaviour<,>));
             }
             return services;
+        }
+
+        internal sealed class PipelineConfiguration
+        {            
+            public bool PereformenceLogging { get; set; } = false;
+            public bool RequestPayloadLogging { get; set; } = false;
+            public bool RequestResultLogging { get; set; } = false;
         }
     }
 }

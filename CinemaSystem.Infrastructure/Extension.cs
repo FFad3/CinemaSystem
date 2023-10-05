@@ -21,15 +21,7 @@ namespace CinemaSystem.Infrastructure
             services.AddSingleton<ExceptionMiddleware>();
             services.AddSeciurity();
 
-            var pipelineOptions = configuration.GetOptions<PipelineConfiguration>(PipelineConfiguration.SectionName);
-            services.ConfigureRequestPipeline(pipelineOptions);
-
-            //services.ConfigureRequestPipeline(cfg =>
-            //{
-            //    cfg.PereformenceLogging = false;
-            //    cfg.RequestResultLogging = false;
-            //    cfg.RequestPayloadLogging = false;
-            //});
+            services.ConfigureMediatRPipeline(configuration);
 
             services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
