@@ -2,12 +2,12 @@
 
 namespace CinemaSystem.Core.ValueObjects
 {
-    public sealed record UserName
+    public sealed record Username
     {
         public const int MinLenght = 3;
         public const int MaxLenght = 20;
         public string Value { get; }
-        public UserName(string value)
+        public Username(string value)
         {
             if (string.IsNullOrEmpty(value) || value.Length is < MinLenght or > MaxLenght)
             {
@@ -18,9 +18,9 @@ namespace CinemaSystem.Core.ValueObjects
             Value = value;
         }
 
-        public static implicit operator string(UserName value) => value.Value;
+        public static implicit operator string(Username value) => value.Value;
 
-        public static implicit operator UserName(string value) => new(value);
+        public static implicit operator Username(string value) => new(value);
 
         public override string ToString() => Value;
     }

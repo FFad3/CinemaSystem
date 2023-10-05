@@ -6,14 +6,13 @@ namespace CinemaSystem.Core.Entities
     {
         //TO DO: how to set to auto generate by db
         public EntityId Id { get; }
-
-        public UserName Username { get; }
+        public Username Username { get; }
         public Password Password { get; }
         public FirstName FirstName { get; }
         public LastName LastName { get; }
         public Email Email { get; }
 
-        public User(EntityId id, UserName username, Password password, FirstName firstName, LastName lastName, Email email)
+        public User(EntityId id, Username username, Password password, FirstName firstName, LastName lastName, Email email)
         {
             Id = id;
             Username = username;

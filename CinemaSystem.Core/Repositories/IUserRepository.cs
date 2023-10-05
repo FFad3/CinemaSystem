@@ -7,7 +7,7 @@ namespace CinemaSystem.Core.Repositories
     {
         Task<User> GetByEmailAsync(Email email, CancellationToken cancellationToken);
 
-        Task<User> GetByUserNameAsync(UserName userName, CancellationToken cancellationToken);
+        Task<User> GetByUserNameAsync(Username userName, CancellationToken cancellationToken);
 
         Task CreateAsync(User newUser, CancellationToken cancellationToken);
     }
