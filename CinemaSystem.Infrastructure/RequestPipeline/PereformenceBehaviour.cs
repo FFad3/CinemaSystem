@@ -3,10 +3,10 @@ using Humanizer;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace CinemaSystem.Application.Abstraction.Requests
+namespace CinemaSystem.Infrastructure.RequestPipeline
 {
     internal class PereformenceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IRequest
+        where TRequest : IRequest<TResponse>
     {
         private readonly ILogger<PereformenceBehaviour<TRequest, TResponse>> _logger;
         private readonly IClock _clock;
@@ -22,15 +22,15 @@ namespace CinemaSystem.Application.Abstraction.Requests
             var requestName = typeof(TRequest).Name.Underscore();
 
             var startTime = _clock.Current();
-            _logger.LogInformation("Begin request Name: {requestName}", requestName);
+            _logger.LogInformation("Request: {requestName}", requestName);
 
             var result = await next();
 
             var endTime = _clock.Current();
 
-            var elapsedMiliseconds = (startTime - endTime).TotalMilliseconds;
+            var elapsedMiliseconds = (endTime - startTime).TotalMilliseconds;
 
-            _logger.LogInformation("End request Name: {request} | Execution time: {time}", requestName, elapsedMiliseconds);
+            _logger.LogInformation("Request: {request} | Elapsed time: {time}", requestName, elapsedMiliseconds);
 
             return result;
         }

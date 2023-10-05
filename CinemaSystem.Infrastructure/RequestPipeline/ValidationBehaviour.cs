@@ -1,10 +1,12 @@
-﻿using FluentValidation;
+﻿using CinemaSystem.Application.Abstraction.Requests;
+using CinemaSystem.Infrastructure.Exceptions;
+using FluentValidation;
 using MediatR;
 
-namespace CinemaSystem.Application.Abstraction.Requests
+namespace CinemaSystem.Infrastructure.RequestPipeline
 {
     internal class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : ICommand<TResponse>, IAuthCommmand<TResponse>
+        where TRequest : ICommand<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -22,16 +24,26 @@ namespace CinemaSystem.Application.Abstraction.Requests
 
             var context = new ValidationContext<TRequest>(request);
 
-            var errorsDictionary = _validators
-                .Select(x => x.Validate(context))
-                .SelectMany(x => x.Errors)
-                .Where(x => x is not null)
-                .GroupBy(x => new { x.PropertyName, x.ErrorMessage })
-                .ToList();
+            var validatioResults = await Task.WhenAll(_validators
+                .Select(v=> v.ValidateAsync(context, cancellationToken)))
+                .ConfigureAwait(false);
 
-            if (errorsDictionary.Any())
+            var validationFailures = validatioResults
+                .SelectMany(x=>x.Errors)
+                .Where(x=>x is not null)
+                .GroupBy(
+                    x => x.PropertyName,
+                    x => x.ErrorMessage,
+                (propertyName, errorMessages) => new
+                {
+                    Key = propertyName,
+                    Values = errorMessages.Distinct().ToArray()
+                })
+            .ToDictionary(x => x.Key, x => x.Values);
+
+            if (validationFailures.Any())
             {
-                throw new ValidationException("Tuutaj są błedy jak je wrzucic do srodka");
+                throw new FluentValidationException(validationFailures);
             }
 
             return await next().ConfigureAwait(false);

@@ -1,12 +1,12 @@
-﻿using CinemaSystem.Application.Abstraction.Requests;
+﻿using CinemaSystem.Application.Abstraction.Common.Auth;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace CinemaSystem.Application.Abstraction.Requestsr
+namespace CinemaSystem.Infrastructure.RequestPipeline
 {
     internal class RequestLoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IQuery<TResponse>, ICommand<TResponse>
+        where TRequest : IRequest<TResponse>
     {
         private readonly ILogger<RequestLoggingBehaviour<TRequest, TResponse>> _logger;
 
@@ -17,8 +17,11 @@ namespace CinemaSystem.Application.Abstraction.Requestsr
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
-            var requestAsJson = JsonConvert.SerializeObject(request);
-            _logger.LogInformation("Request payload: {requestAsJson}", requestAsJson);
+            if (request is not ISecret)
+            {
+                var requestAsJson = JsonConvert.SerializeObject(request);
+                _logger.LogInformation("Request payload: {requestAsJson}", requestAsJson);
+            }
             return await next();
         }
     }
