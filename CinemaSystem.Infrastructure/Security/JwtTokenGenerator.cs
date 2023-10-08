@@ -6,15 +6,15 @@ using CinemaSystem.Core.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace CinemaSystem.Infrastructure.Security.TokenGenerator
+namespace CinemaSystem.Infrastructure.Security
 {
-    internal sealed class TokenGenerator : ITokenGenarator
+    internal sealed class JwtTokenGenerator : ITokenGenarator
     {
         private readonly IClock _clock;
-        private readonly TokenGeneratorSettings _options;
+        private readonly JwtSettings _options;
         private readonly JwtSecurityTokenHandler _jwtSecurityToken = new();
 
-        public TokenGenerator(IOptions<TokenGeneratorSettings> options, IClock clock)
+        public JwtTokenGenerator(IOptions<JwtSettings> options, IClock clock)
         {
             _options = options.Value;
             _clock = clock;
@@ -51,11 +51,6 @@ namespace CinemaSystem.Infrastructure.Security.TokenGenerator
                 );
 
             return _jwtSecurityToken.WriteToken(token);
-        }
-
-        public string GenerateSeciurityToken()
-        {
-            throw new NotImplementedException();
         }
     }
 }
