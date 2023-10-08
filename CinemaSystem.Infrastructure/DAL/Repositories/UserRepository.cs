@@ -20,7 +20,7 @@ namespace CinemaSystem.Infrastructure.DAL
         public async Task<User> GetByEmailAsync(Email email, CancellationToken cancellationToken) =>
             await _users.SingleOrDefaultAsync(x => x.Email == email, cancellationToken);
 
-        public async Task<User> GetByUserNameAsync(Username userName, CancellationToken cancellationToken) =>
+        public async Task<User> GetByUsernameAsync(Username userName, CancellationToken cancellationToken) =>
             await _users.SingleOrDefaultAsync(x => x.Username == userName, cancellationToken);
     }
 }

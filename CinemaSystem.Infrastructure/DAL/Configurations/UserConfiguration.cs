@@ -17,28 +17,28 @@ namespace CinemaSystem.Infrastructure.DAL.Configurations
             builder.Property(x => x.Username)
                 .HasConversion(x => x.Value, x => new Username(x))
                 .IsRequired()
-                .HasMaxLength(20);
+                .HasMaxLength(Username.MaxLenght);
 
             builder.Property(x => x.Password)
                .HasConversion(x => x.Value, x => new Password(x))
                .IsRequired()
-               .HasMaxLength(200);
+               .HasMaxLength(Password.MaxLenght);
 
             builder.Property(x => x.FirstName)
                 .HasConversion(x => x.Value, x => new FirstName(x))
                 .IsRequired()
-                .HasMaxLength(20);
+                .HasMaxLength(FirstName.MaxLenght);
 
             builder.Property(x => x.LastName)
                 .HasConversion(x => x.Value, x => new LastName(x))
                 .IsRequired()
-                .HasMaxLength(20);
+                .HasMaxLength(LastName.MaxLenght);
 
             builder.HasIndex(x => x.Email).IsUnique();
             builder.Property(x => x.Email)
                 .HasConversion(x => x.Value, x => new Email(x))
                 .IsRequired()
-                .HasMaxLength(20);
+                .HasMaxLength(Email.MaxLenght);
         }
     }
 }

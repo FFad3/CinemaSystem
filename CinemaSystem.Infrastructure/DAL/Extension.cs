@@ -8,11 +8,11 @@ namespace CinemaSystem.Infrastructure.DAL
 {
     internal static class Extension
     {
-        private const string OptionsSectionName = "SQLdb";
+        private const string SectionName = "SQLdb";
         internal static IServiceCollection AddSql(this IServiceCollection services,IConfiguration configuration)
         {
             services.Configure<SQLOptions>(configuration);
-            var options = configuration.GetOptions<SQLOptions>(OptionsSectionName);
+            var options = configuration.GetOptions<SQLOptions>(SectionName);
 
             services.AddDbContext<CinemaSystemDbContext>(cfg =>
             {
