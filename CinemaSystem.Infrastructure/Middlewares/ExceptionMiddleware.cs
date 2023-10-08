@@ -1,4 +1,5 @@
-﻿using CinemaSystem.Core.Exceptions;
+﻿using CinemaSystem.Application.Exceptions;
+using CinemaSystem.Core.Exceptions;
 using Humanizer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -32,6 +33,13 @@ namespace CinemaSystem.Infrastructure.Middlewares
             var normalizedExName = NormalizeExceptionName(exception);
             ProblemDetails problemDetails = exception switch
             {
+                InvalidCredentialsException ex => new ProblemDetails 
+                { 
+                    StatusCode = StatusCodes.Status401Unauthorized,
+                    Title = "Invalid credentials",
+                    Type = normalizedExName,
+                    Details = ex.Message
+                },
                 CustomValidationException ex => new ProblemDetails
                 {
                     StatusCode = StatusCodes.Status400BadRequest,
