@@ -16,14 +16,15 @@ namespace CinemaSystem.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSeciurity(configuration);
             services.AddSql(configuration);
+
             services.AddSingleton<IClock, Clock>();
-            services.AddSingleton<ExceptionMiddleware>();
-            services.AddSeciurity();
 
             services.ConfigureMediatRPipeline(configuration);
 
             services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(swagger =>
@@ -36,6 +37,7 @@ namespace CinemaSystem.Infrastructure
                 });
             });
 
+            services.AddSingleton<ExceptionMiddleware>();
             return services;
         }
 
@@ -52,6 +54,7 @@ namespace CinemaSystem.Infrastructure
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
