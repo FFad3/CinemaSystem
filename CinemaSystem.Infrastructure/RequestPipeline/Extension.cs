@@ -36,6 +36,9 @@ namespace CinemaSystem.Infrastructure.RequestPipeline
             {
                 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLoggingBehaviour<,>));
             }
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehaviour<,>));
+
             if (settings.RequestResultLogging)
             {
                 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ResultLoggingBehaviour<,>));
