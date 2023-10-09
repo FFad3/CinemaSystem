@@ -20,6 +20,7 @@ namespace CinemaSystem.Infrastructure
             services.AddSql(configuration);
 
             services.AddSingleton<IClock, Clock>();
+            services.AddHttpContextAccessor();
 
             services.ConfigureMediatRPipeline(configuration);
 

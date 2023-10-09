@@ -8,6 +8,12 @@ namespace CinemaSystem.Infrastructure.Security
         public const string TokenKey = "jwt";
         public const string RefreshTokenKey = "refresh-token";
         private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public HttpContextTokenStorage(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+
         public string? GetToken()
         {
             return _httpContextAccessor.HttpContext.Request.Cookies[TokenKey];

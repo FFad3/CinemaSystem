@@ -18,7 +18,7 @@ namespace CinemaSystem.Infrastructure.DAL
             {
                 if(options.UseInMemory)
                 {
-                    cfg.UseInMemoryDatabase("CinemaSystemDb");
+                    cfg.UseInMemoryDatabase(options.InMemoryDbName);
                 }
                 else
                 {

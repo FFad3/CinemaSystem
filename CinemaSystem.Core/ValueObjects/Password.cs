@@ -4,7 +4,7 @@ namespace CinemaSystem.Core.ValueObjects
 {
     public sealed record Password
     {
-        public const int MinLenght = 40;
+        public const int MinLenght = 6;
         public const int MaxLenght = 200;
         public string Value { get; }
         public Password(string value)
