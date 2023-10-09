@@ -3,7 +3,7 @@ using CinemaSystem.Application.Features.Auth.Commands.SignUp;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CinemaStystem.Api.Controllers
+namespace CinemaSystem.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

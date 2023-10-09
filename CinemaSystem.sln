@@ -3,15 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaStystem.Api", "CinemaStystem.Api\CinemaStystem.Api.csproj", "{BB995F65-0DE3-4062-A17F-733BB185E1F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaSystem.Api", "CinemaSystem.Api\CinemaSystem.Api.csproj", "{BB995F65-0DE3-4062-A17F-733BB185E1F3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaSystem.Application", "CinemaSystem.Application\CinemaSystem.Application.csproj", "{12253683-E9BE-48C0-A682-16FBA4AF74CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9477FB30-E743-4F89-B61E-2969987B55C2}"
+	ProjectSection(SolutionItems) = preProject
+		.env = .env
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaSystem.Infrastructure", "CinemaSystem.Infrastructure\CinemaSystem.Infrastructure.csproj", "{357FAF15-D1C5-421E-B5C7-851DC77F8C3E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaSystem.Core", "CinemaSystem.Core\CinemaSystem.Core.csproj", "{E53FD055-C920-4879-B5CE-5339B3BA6E09}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E62D407C-7D01-4098-AAC5-DE08A13247B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +40,10 @@ Global
 		{E53FD055-C920-4879-B5CE-5339B3BA6E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E53FD055-C920-4879-B5CE-5339B3BA6E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E53FD055-C920-4879-B5CE-5339B3BA6E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E62D407C-7D01-4098-AAC5-DE08A13247B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E62D407C-7D01-4098-AAC5-DE08A13247B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E62D407C-7D01-4098-AAC5-DE08A13247B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E62D407C-7D01-4098-AAC5-DE08A13247B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

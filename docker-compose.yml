@@ -1,0 +1,43 @@
+version: '3.4'
+
+networks:
+  cinemasystem-network:
+
+volumes:
+  data:    
+    driver: local
+
+services:
+  cinemasystem.api:
+    container_name: cinemasystem-api
+    image: ${DOCKER_REGISTRY-}cinemasystemapi
+    build:
+      context: .
+      dockerfile: CinemaSystem.Api/Dockerfile
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    - ASPNETCORE_URLS=https://+:443;http://+:80
+    - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERT_PASSWORD}
+    - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports:
+    - "8080:80" 
+    - "8081:443" 
+    volumes:
+    - ~/.aspnet/https:/https:ro
+    networks:
+    - cinemasystem-network
+    depends_on:
+    - cinemasystem-db
+
+  cinemasystem-db:
+    container_name: cinemasystem-MySql
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+    - "1433:1433"
+    environment:
+        MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+        ACCEPT_EULA: "Y"
+    volumes:
+    - data:/var/opt/mssql
+    networks:
+    - cinemasystem-network
