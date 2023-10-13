@@ -15,7 +15,7 @@ namespace CinemaSystem.Infrastructure.Security
 
         public string Secure(string password) => _passwordHasher.HashPassword(default!, password);
 
-        public bool Validate(string password, string securedPasssword) =>
-            _passwordHasher.VerifyHashedPassword(default!, password, securedPasssword) == PasswordVerificationResult.Success;
+        public bool Validate(string hashedPassword, string password) =>
+            _passwordHasher.VerifyHashedPassword(default!, hashedPassword, password) == PasswordVerificationResult.Success;
     }
 }

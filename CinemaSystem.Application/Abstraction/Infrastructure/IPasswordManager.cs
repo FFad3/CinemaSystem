@@ -4,6 +4,6 @@
     {
         string Secure(string password);
 
-        bool Validate(string password, string securedPasssword);
+        bool Validate(string hashedPassword, string password);
     }
 }

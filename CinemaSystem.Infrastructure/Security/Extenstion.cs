@@ -11,12 +11,11 @@ namespace CinemaSystem.Infrastructure.Security
 {
     internal static class Extenstion
     {
-        private const string SectionName = "JWT";
 
         internal static IServiceCollection AddSeciurity(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<JwtSettings>(configuration);
-            var config = configuration.GetOptions<JwtSettings>(SectionName);
+            services.Configure<JwtSettings>(configuration.GetRequiredSection(JwtSettings.SectionName));
+            var config = configuration.GetOptions<JwtSettings>(JwtSettings.SectionName);
 
             services.AddAuthentication(x =>
             {

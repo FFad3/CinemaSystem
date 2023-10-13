@@ -25,7 +25,7 @@ namespace CinemaSystem.Application.Features.Auth.Commands.SignIn
         {
             var user = await _userRepository.GetByUsernameAsync(request.Username, cancellationToken) ?? throw new InvalidCredentialsException();
 
-            _ = _passwordManager.Validate(request.Password, user.Password) ? true : throw new InvalidCredentialsException();
+            _ = _passwordManager.Validate(user.Password, request.Password) ? true : throw new InvalidCredentialsException();
 
             var token = _tokenGenarator.GenarateToken(user, "user");
 

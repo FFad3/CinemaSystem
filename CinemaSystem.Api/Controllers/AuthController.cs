@@ -26,6 +26,8 @@ namespace CinemaSystem.Api.Controllers
         }
 
         [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register(SignUp request)
         {
             await _mediator.Send(request);

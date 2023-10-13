@@ -3,10 +3,11 @@ using CinemaSystem.Application.Abstraction.Requests;
 using CinemaSystem.Core.Entities;
 using CinemaSystem.Core.Repositories;
 using CinemaSystem.Core.ValueObjects;
+using MediatR;
 
 namespace CinemaSystem.Application.Features.Auth.Commands.SignUp
 {
-    internal sealed class SignUpCommandHandler : ICommandHandler<SignUp, User>
+    internal sealed class SignUpCommandHandler : ICommandHandler<SignUp, Unit>
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordManager _passwordHasher;
@@ -17,7 +18,7 @@ namespace CinemaSystem.Application.Features.Auth.Commands.SignUp
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<User> Handle(SignUp request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(SignUp request, CancellationToken cancellationToken)
         {
             var passwordHash = _passwordHasher.Secure(request.Password);
 
@@ -32,7 +33,7 @@ namespace CinemaSystem.Application.Features.Auth.Commands.SignUp
 
             await _userRepository.CreateAsync(newUser, cancellationToken);
 
-            return newUser;
+            return Unit.Value;
         }
     }
 }

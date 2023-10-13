@@ -36,7 +36,7 @@ namespace CinemaSystem.Infrastructure.Security
             };
 
             var now = _clock.Current();
-            var expires = now.Add(_options.Expiry ?? TimeSpan.FromHours(1));
+            var expires = now.Add(TimeSpan.FromHours(_options.Expiry));
 
             var securityKey = CreateSecurityKey(_options.SigningKey);
             var signingCredentials = CreateSigningCredentials(securityKey);
