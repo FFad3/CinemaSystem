@@ -30,7 +30,7 @@ namespace CinemaSystem.Infrastructure.RequestPipeline
 
             var elapsedMiliseconds = (endTime - startTime).TotalMilliseconds;
 
-            _logger.LogInformation("Request: {request} | Elapsed time: {time}", requestName, elapsedMiliseconds);
+            _logger.LogInformation("Request: {request} | Elapsed time: {time} ms", requestName, elapsedMiliseconds);
 
             return result;
         }

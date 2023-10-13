@@ -6,10 +6,10 @@ namespace CinemaSystem.Infrastructure.RequestPipeline
 {
     internal static class Extension
     {
-        private const string SectionName = "MediatRPieline";
+        
         internal static IServiceCollection ConfigureMediatRPipeline(this IServiceCollection services, IConfiguration configuration)
         {
-            var config = configuration.GetOptions<PipelineConfiguration>(SectionName);
+            var config = configuration.GetOptions<PipelineConfiguration>(PipelineConfiguration.SectionName);
 
             services.ConfigureRequestPipeline(cfg =>
             {
@@ -47,7 +47,8 @@ namespace CinemaSystem.Infrastructure.RequestPipeline
         }
 
         internal sealed class PipelineConfiguration
-        {            
+        {
+            public const string SectionName = "MediatRPieline";
             public bool PereformenceLogging { get; set; } = false;
             public bool RequestPayloadLogging { get; set; } = false;
             public bool RequestResultLogging { get; set; } = false;

@@ -23,11 +23,14 @@ namespace CinemaSystem.Infrastructure.RequestPipeline
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
-            //InMem Db doesnt support transactions
-            if(_sqlOptions.Value.UseInMemory)
-                return await next();
-
             TResponse result;
+            //InMem Db doesnt support transactions
+            if (_sqlOptions.Value.UseInMemory)
+            {
+                result = await next();
+                await _context.SaveChangesAsync(cancellationToken);
+                return result;
+            }
 
             using var dbContextTransaction = await _context.Database.BeginTransactionAsync(cancellationToken);
             try
