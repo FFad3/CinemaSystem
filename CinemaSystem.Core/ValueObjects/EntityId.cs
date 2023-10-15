@@ -1,4 +1,5 @@
-﻿using CinemaSystem.Core.Exceptions;
+﻿using System;
+using CinemaSystem.Core.Exceptions;
 
 namespace CinemaSystem.Core.ValueObjects
 {
@@ -18,5 +19,7 @@ namespace CinemaSystem.Core.ValueObjects
         public static implicit operator Guid(EntityId date) => date.Value;
 
         public static implicit operator EntityId(Guid value) => new(value);
+
+        public static EntityId Generate() => new(Guid.NewGuid());
     }
 }

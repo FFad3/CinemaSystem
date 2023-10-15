@@ -20,16 +20,9 @@ namespace CinemaSystem.Application.Features.Auth.Commands.SignUp
 
         public async Task<Unit> Handle(SignUp request, CancellationToken cancellationToken)
         {
-            var passwordHash = _passwordHasher.Secure(request.Password);
+            var hashedPassword = _passwordHasher.Secure(request.Password);
 
-            var Username = new Username(request.Username);
-            var HashPassword = new Password(passwordHash);
-            var Email = new Email(request.Email);
-            var FirstName = new FirstName(request.FirstName);
-            var LastName = new LastName(request.LastName);
-            var UserId = Guid.NewGuid();
-
-            var newUser = new User(UserId, Username, HashPassword, FirstName, LastName, Email);
+            var newUser = new User(EntityId.Generate(), request.Username, hashedPassword, request.FirstName, request.LastName, request.Email);
 
             await _userRepository.CreateAsync(newUser, cancellationToken);
 
