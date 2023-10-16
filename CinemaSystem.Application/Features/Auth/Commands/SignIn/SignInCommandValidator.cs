@@ -1,4 +1,4 @@
-﻿using CinemaSystem.Core.ValueObjects;
+﻿using CinemaSystem.Core.ValueObjects.Auth;
 using FluentValidation;
 
 namespace CinemaSystem.Application.Features.Auth.Commands.SignIn

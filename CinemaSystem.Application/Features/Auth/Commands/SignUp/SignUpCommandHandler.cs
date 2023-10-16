@@ -1,8 +1,8 @@
 ﻿using CinemaSystem.Application.Abstraction.Infrastructure;
 using CinemaSystem.Application.Abstraction.Requests;
 using CinemaSystem.Core.Entities;
-using CinemaSystem.Core.Repositories;
-using CinemaSystem.Core.ValueObjects;
+using CinemaSystem.Core.Repositories.Auth;
+using CinemaSystem.Core.ValueObjects.Common;
 using MediatR;
 
 namespace CinemaSystem.Application.Features.Auth.Commands.SignUp

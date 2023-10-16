@@ -1,5 +1,6 @@
-﻿using CinemaSystem.Core.Repositories;
+﻿using CinemaSystem.Core.Repositories.Auth;
 using CinemaSystem.Infrastructure.DAL.Repositories;
+using CinemaSystem.Infrastructure.DAL.Repositories.Auth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,7 @@ namespace CinemaSystem.Infrastructure.DAL
 
             });
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
             return services;
         }
     }

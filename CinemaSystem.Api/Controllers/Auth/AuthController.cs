@@ -3,7 +3,7 @@ using CinemaSystem.Application.Features.Auth.Commands.SignUp;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CinemaSystem.Api.Controllers
+namespace CinemaSystem.Api.Controllers.Auth
 {
     [ApiController]
     [Route("[controller]")]
@@ -35,10 +35,10 @@ namespace CinemaSystem.Api.Controllers
             return Ok();
         }
 
-        [HttpPost("refresh-token")]
-        public async Task<IActionResult> RefreshToken()
-        {
-            throw new NotImplementedException();
-        }
+        //[HttpPost("refresh-token")]
+        //public async Task<IActionResult> RefreshToken()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

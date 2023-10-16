@@ -14,6 +14,7 @@ namespace CinemaSystem.Infrastructure.RequestPipeline
         private readonly CinemaSystemDbContext _context;
         private readonly ILogger<TransactionBehaviour<TRequest, TResponse>> _logger;
         private readonly IOptions<SQLOptions> _sqlOptions;
+
         public TransactionBehaviour(CinemaSystemDbContext context, ILogger<TransactionBehaviour<TRequest, TResponse>> logger, IOptions<SQLOptions> sqlOptions)
         {
             _context = context;
@@ -42,14 +43,13 @@ namespace CinemaSystem.Infrastructure.RequestPipeline
                 await dbContextTransaction.CommitAsync(cancellationToken);
 
                 _logger.LogDebug("Transaction completed succesfully");
+                return result;
             }
             catch (Exception)
             {
                 await dbContextTransaction.RollbackAsync(cancellationToken);
                 throw;
             }
-
-            return result;
         }
     }
 }

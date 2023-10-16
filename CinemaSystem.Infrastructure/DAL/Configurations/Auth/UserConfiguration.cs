@@ -1,9 +1,10 @@
 ﻿using CinemaSystem.Core.Entities;
-using CinemaSystem.Core.ValueObjects;
+using CinemaSystem.Core.ValueObjects.Auth;
+using CinemaSystem.Core.ValueObjects.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CinemaSystem.Infrastructure.DAL.Configurations
+namespace CinemaSystem.Infrastructure.DAL.Configurations.Auth
 {
     internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
     {

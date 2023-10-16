@@ -1,6 +1,6 @@
 ﻿using CinemaSystem.Application.Extensions;
-using CinemaSystem.Core.Repositories;
-using CinemaSystem.Core.ValueObjects;
+using CinemaSystem.Core.Repositories.Auth;
+using CinemaSystem.Core.ValueObjects.Auth;
 using FluentValidation;
 
 namespace CinemaSystem.Application.Features.Auth.Commands.SignUp

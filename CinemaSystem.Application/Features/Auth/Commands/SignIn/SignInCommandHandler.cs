@@ -1,7 +1,7 @@
 ﻿using CinemaSystem.Application.Abstraction.Infrastructure;
 using CinemaSystem.Application.Abstraction.Requests;
 using CinemaSystem.Application.Exceptions;
-using CinemaSystem.Core.Repositories;
+using CinemaSystem.Core.Repositories.Auth;
 using MediatR;
 
 namespace CinemaSystem.Application.Features.Auth.Commands.SignIn

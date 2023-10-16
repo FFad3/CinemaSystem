@@ -5,10 +5,13 @@ namespace CinemaSystem.Infrastructure.DAL
 {
     internal class CinemaSystemDbContext : DbContext
     {
+        #region DbSets
         public DbSet<User> Users { get; set; }
-        public CinemaSystemDbContext(DbContextOptions<CinemaSystemDbContext> options):base(options)
+        public DbSet<Role> Roles { get; set; }
+        #endregion
+        public CinemaSystemDbContext(DbContextOptions<CinemaSystemDbContext> options) : base(options)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
