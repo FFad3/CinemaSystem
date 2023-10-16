@@ -1,18 +1,18 @@
-﻿using CinemaSystem.Core.ValueObjects;
+﻿using CinemaSystem.Core.ValueObjects.Auth;
+using CinemaSystem.Core.ValueObjects.Common;
 
 namespace CinemaSystem.Core.Entities
 {
     public class Role
     {
-        public EntityId Id { get; private set; } = EntityId.Generate();
+        public EntityId Id { get; private set; }
         public RoleName RoleName { get; private set; }
-        public virtual ICollection<RoleClaim> Claims { get; private set; } = new List<RoleClaim>();
+        public ICollection<RoleClaim> Claims { get; private set; }  = new List<RoleClaim>();
 
-        public Role(EntityId id,RoleName roleName, ICollection<RoleClaim>? claims)
+        public Role(EntityId id, RoleName roleName)
         {
             this.Id = id;
             this.RoleName = roleName;
-            this.Claims = claims;
         }
 
         public void ChangeName(RoleName roleName)

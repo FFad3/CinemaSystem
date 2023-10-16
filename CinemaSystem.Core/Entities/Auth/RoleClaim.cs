@@ -1,4 +1,5 @@
-﻿using CinemaSystem.Core.ValueObjects;
+﻿using CinemaSystem.Core.ValueObjects.Auth;
+using CinemaSystem.Core.ValueObjects.Common;
 
 namespace CinemaSystem.Core.Entities
 {
@@ -6,6 +7,7 @@ namespace CinemaSystem.Core.Entities
     {
         public EntityId Id { get; private set; }
         public ClaimName ClaimName { get; private set; }
+        public ICollection<Role> Roles { get; private set; } = new List<Role>();
 
         public RoleClaim(EntityId id, ClaimName claimName)
         {

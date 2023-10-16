@@ -1,8 +1,9 @@
-﻿using CinemaSystem.Core.ValueObjects;
+﻿using CinemaSystem.Core.ValueObjects.Auth;
+using CinemaSystem.Core.ValueObjects.Common;
 
 namespace CinemaSystem.Core.Entities
 {
-    public class User
+    public sealed class User
     {
         public EntityId Id { get; private set; }
         public Username Username { get; private set; }
