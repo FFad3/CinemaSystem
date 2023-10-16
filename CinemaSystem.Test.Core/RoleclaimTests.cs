@@ -1,4 +1,5 @@
 using CinemaSystem.Core.Exceptions;
+using CinemaSystem.Core.ValueObjects.Common;
 
 namespace CinemaSystem.Test.Core
 {
