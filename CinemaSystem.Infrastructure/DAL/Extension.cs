@@ -26,6 +26,11 @@ namespace CinemaSystem.Infrastructure.DAL
                 }
 
             });
+
+            //Db migrations and seeding data
+            if(!options.UseInMemory)
+                services.AddHostedService<DatabaseInitializer>();
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             return services;
