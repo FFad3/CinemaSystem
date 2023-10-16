@@ -1,20 +1,33 @@
 ﻿using CinemaSystem.Core.Exceptions;
 
-namespace CinemaSystem.Core.ValueObjects
+namespace CinemaSystem.Core.ValueObjects.Auth
 {
     public sealed record ClaimName
     {
+        public const int MinLenght = 4;
+        public const int MaxLenght = 20;
+
         public string Value { get; }
 
         public ClaimName(string claimName)
         {
-            if (string.IsNullOrEmpty(claimName))
+            if (!IsNameValid(claimName))
             {
-                var propName = this.GetType().Name;
+                var propName = GetType().Name;
                 throw new InvalidTextException(propName, claimName);
             }
 
             Value = claimName.ToUpper();
+        }
+
+        private static bool IsNameValid(string value)
+        {
+            if (string.IsNullOrEmpty(value) || value.Length is < MinLenght or > MaxLenght)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public static implicit operator string(ClaimName claim) => claim.Value;

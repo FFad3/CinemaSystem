@@ -1,6 +1,6 @@
 ﻿using CinemaSystem.Core.Exceptions;
 
-namespace CinemaSystem.Core.ValueObjects
+namespace CinemaSystem.Core.ValueObjects.Auth
 {
     public sealed record FirstName
     {
@@ -11,7 +11,7 @@ namespace CinemaSystem.Core.ValueObjects
         {
             if (string.IsNullOrEmpty(value) || value.Length is < MinLenght or > MaxLenght)
             {
-                var propName = this.GetType().Name;
+                var propName = GetType().Name;
                 throw new InvalidTextException(propName, value);
             }
 

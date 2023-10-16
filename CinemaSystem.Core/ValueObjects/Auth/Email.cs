@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using CinemaSystem.Core.Exceptions;
 
-namespace CinemaSystem.Core.ValueObjects
+namespace CinemaSystem.Core.ValueObjects.Auth
 {
     public sealed record Email
     {
@@ -21,7 +21,7 @@ namespace CinemaSystem.Core.ValueObjects
                 || value.Length is < MinLenght or > MaxLenght
                 || !Regex.IsMatch(value))
             {
-                var propName = this.GetType().Name;
+                var propName = GetType().Name;
                 throw new InvalidTextException(propName, value);
             }
 

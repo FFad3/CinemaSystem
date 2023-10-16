@@ -1,7 +1,7 @@
 ﻿using System;
 using CinemaSystem.Core.Exceptions;
 
-namespace CinemaSystem.Core.ValueObjects
+namespace CinemaSystem.Core.ValueObjects.Common
 {
     public sealed record EntityId
     {
