@@ -9,7 +9,8 @@ namespace CinemaSystem.Application.MappingProfiles
 
         public RoleMappingProfile()
         {
-            CreateMap<Role, RoleDto>();
+            CreateMap<Role, RoleDto>()
+                 .ForMember(dest => dest.RoleName, opts => opts.MapFrom(src => src.RoleName.Value));
         }
     }
 }
