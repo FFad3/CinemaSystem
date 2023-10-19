@@ -10,14 +10,14 @@ namespace CinemaSystem.Infrastructure.DAL
 {
     internal static class Extension
     {
-        internal static IServiceCollection AddSql(this IServiceCollection services,IConfiguration configuration)
+        internal static IServiceCollection AddSql(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<SQLOptions>(configuration);
             var options = configuration.GetOptions<SQLOptions>(SQLOptions.SectionName);
 
             services.AddDbContext<CinemaSystemDbContext>(cfg =>
             {
-                if(options.UseInMemory)
+                if (options.UseInMemory)
                 {
                     cfg.UseInMemoryDatabase(options.InMemoryDbName);
                 }
@@ -25,16 +25,16 @@ namespace CinemaSystem.Infrastructure.DAL
                 {
                     cfg.UseSqlServer(options.ConnectionString);
                 }
-
             });
 
             //Db migrations and seeding data
-            if(!options.UseInMemory)
+            if (!options.UseInMemory)
                 services.AddHostedService<DatabaseInitializer>();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IClaimRepository, ClaimRepository>();
             return services;
         }
     }

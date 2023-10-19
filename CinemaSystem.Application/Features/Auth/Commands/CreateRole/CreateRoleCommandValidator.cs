@@ -5,7 +5,7 @@ using FluentValidation;
 
 namespace CinemaSystem.Application.Features.Auth.Commands.CreateRole
 {
-    public sealed class CreateRoleCommandValidator : AbstractValidator<CreateRoleCommand>
+    internal sealed class CreateRoleCommandValidator : AbstractValidator<CreateRoleCommand>
     {
 
         public CreateRoleCommandValidator(IGenericRepository<Role> roleRepository)

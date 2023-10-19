@@ -6,7 +6,7 @@ using FluentValidation;
 
 namespace CinemaSystem.Application.Features.Auth.Commands.SignUp
 {
-    public sealed class SignUpCommandValidator : AbstractValidator<SignUp>
+    internal sealed class SignUpCommandValidator : AbstractValidator<SignUp>
     {
         public SignUpCommandValidator(IGenericRepository<User> userRepository)
         {
