@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace CinemaSystem.Application.Features.Auth.Commands.SignIn
 {
-    internal sealed class SignInCommandValidator : AbstractValidator<SignIn>
+    public sealed class SignInCommandValidator : AbstractValidator<SignIn>
     {
         public SignInCommandValidator()
         {

@@ -1,5 +1,6 @@
-﻿using CinemaSystem.Application.Extensions;
-using CinemaSystem.Core.Repositories.Auth;
+﻿using CinemaSystem.Application.Abstraction.Infrastructure;
+using CinemaSystem.Application.Extensions;
+using CinemaSystem.Core.Entities;
 using CinemaSystem.Core.ValueObjects.Auth;
 using FluentValidation;
 
@@ -7,14 +8,10 @@ namespace CinemaSystem.Application.Features.Auth.Commands.SignUp
 {
     public sealed class SignUpCommandValidator : AbstractValidator<SignUp>
     {
-        private readonly IUserRepository _userRepository;
-
-        public SignUpCommandValidator(IUserRepository userRepository)
+        public SignUpCommandValidator(IGenericRepository<User> userRepository)
         {
-            _userRepository = userRepository;
-
             RuleFor(x => x.Username)
-                .ValidateUsername(_userRepository);
+                .ValidateUsername(userRepository);
 
             RuleFor(x => x.Password)
                 .NotEmpty()
@@ -35,7 +32,7 @@ namespace CinemaSystem.Application.Features.Auth.Commands.SignUp
                 ;
 
             RuleFor(x => x.Email)
-                .ValidateEmail(_userRepository);
+                .ValidateEmail(userRepository);
         }
     }
 }

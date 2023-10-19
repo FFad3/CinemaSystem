@@ -1,4 +1,7 @@
-﻿using CinemaSystem.Core.Repositories.Auth;
+﻿using CinemaSystem.Application.Abstraction.Infrastructure;
+using CinemaSystem.Application.Features.Auth.Commands.CreateRole;
+using CinemaSystem.Application.Features.Auth.Commands.SignUp;
+using CinemaSystem.Core.Entities;
 using CinemaSystem.Core.ValueObjects.Auth;
 using FluentValidation;
 
@@ -7,19 +10,20 @@ namespace CinemaSystem.Application.Extensions
     internal static class ValidationExtensions
     {
         #region User
-        public static void ValidateUsername<T>(this IRuleBuilder<T, string> ruleBuilder, IUserRepository userRepository)
+
+        public static void ValidateUsername(this IRuleBuilder<SignUp, string> ruleBuilder, IGenericRepository<User> repo)
         {
             ruleBuilder
                 .NotEmpty()
                 .MinimumLength(Username.MinLenght)
                 .MaximumLength(Username.MaxLenght)
                 .MustAsync(async (name, cancelationToken) =>
-                    await userRepository.GetByUsernameAsync(name, cancelationToken) is null)
+                    await repo.IsUnique(x => x.Username.Equals(name), cancelationToken))
                 .WithMessage("Username must be unique")
                 ;
         }
 
-        public static void ValidateEmail<T>(this IRuleBuilder<T, string> ruleBuilder, IUserRepository userRepository)
+        public static void ValidateEmail(this IRuleBuilder<SignUp, string> ruleBuilder, IGenericRepository<User> repo)
         {
             ruleBuilder
                 .NotEmpty()
@@ -27,10 +31,28 @@ namespace CinemaSystem.Application.Extensions
                 .MaximumLength(Username.MaxLenght)
                 .EmailAddress()
                 .MustAsync(async (email, cancelationToken) =>
-                    await userRepository.GetByEmailAsync(email, cancelationToken) is null)
+                    await repo.IsUnique(e => e.Equals(email), cancelationToken))
                 .WithMessage("Email must be unique")
                 ;
         }
-        #endregion
+
+        #endregion User
+
+        #region Role
+
+        public static void ValidateRoleName(this IRuleBuilder<CreateRoleCommand, string> ruleBuilder, IGenericRepository<Role> repo)
+        {
+            ruleBuilder
+                .NotEmpty()
+                .MinimumLength(RoleName.MinLenght)
+                .MaximumLength(RoleName.MaxLenght)
+                .MustAsync(async (roleName, cancelationToken) =>
+                 await repo.IsUnique(x => x.RoleName.Equals(roleName), cancelationToken)
+                )
+                .WithMessage("Role name must be unique")
+                ;
+        }
+
+        #endregion Role
     }
 }
