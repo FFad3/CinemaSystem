@@ -8,6 +8,7 @@ namespace CinemaSystem.Infrastructure.DAL
         #region DbSets
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<RoleClaim> RoleClaim { get; set; }
         #endregion
         public CinemaSystemDbContext(DbContextOptions<CinemaSystemDbContext> options) : base(options)
         {
