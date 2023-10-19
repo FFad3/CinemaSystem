@@ -4,13 +4,13 @@ using CinemaSystem.Core.Entities;
 
 namespace CinemaSystem.Application.MappingProfiles
 {
-    internal class RoleMappingProfile : Profile
+    internal class RoleClaimMappingProfile : Profile
     {
-        public RoleMappingProfile()
+        public RoleClaimMappingProfile()
         {
-            CreateMap<Role, RoleDto>()
+            CreateMap<RoleClaim, ClaimDto>()
                  .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Id.Value))
-                 .ForMember(dest => dest.RoleName, opts => opts.MapFrom(src => src.RoleName.Value));
+                 .ForMember(dest => dest.ClaimName, opts => opts.MapFrom(src => src.ClaimName.Value));
         }
     }
 }
