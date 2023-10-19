@@ -8,6 +8,7 @@ namespace CinemaSystem.Core.Entities
         public EntityId Id { get; private set; }
         public RoleName RoleName { get; private set; }
         public ICollection<RoleClaim> Claims { get; private set; }  = new List<RoleClaim>();
+        public ICollection<User> Users { get; private set; }  = new List<User>();
 
         public Role(EntityId id, RoleName roleName)
         {
@@ -25,6 +26,13 @@ namespace CinemaSystem.Core.Entities
             if (Claims.Contains(claim))
                 throw new InvalidOperationException();
             Claims.Add(claim);
+        }
+        public void AddClaim(IEnumerable<RoleClaim> claims)
+        {
+            foreach (var claim in claims)
+            {
+                AddClaim(claim);
+            }
         }
 
         public void RemoveClaim(RoleClaim claim)

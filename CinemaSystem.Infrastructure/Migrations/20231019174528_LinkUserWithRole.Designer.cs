@@ -4,6 +4,7 @@ using CinemaSystem.Infrastructure.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(CinemaSystemDbContext))]
-    partial class CinemaSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231019174528_LinkUserWithRole")]
+    partial class LinkUserWithRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

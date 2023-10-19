@@ -20,6 +20,8 @@ namespace CinemaSystem.Infrastructure.DAL.Configurations.Auth
                 .IsRequired()
                 .HasMaxLength(RoleName.MaxLenght);
 
+            builder.HasMany(r => r.Users)
+                .WithOne(u => u.Role);
 
             builder.HasMany(c => c.Claims)
                 .WithMany(x => x.Roles)

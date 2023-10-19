@@ -12,6 +12,9 @@ namespace CinemaSystem.Core.Entities
         public LastName LastName { get; private set; }
         public Email Email { get; private set; }
 
+        public EntityId RoleId { get; private set; }
+        public Role Role { get; private set; }
+
         public User(EntityId id, Username username, Password password, FirstName firstName, LastName lastName, Email email)
         {
             this.Id = id;
@@ -20,6 +23,16 @@ namespace CinemaSystem.Core.Entities
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Email = email;
+        }
+
+        public void SetRole(Role role)
+        {
+            RoleId = role.Id;
+            Role = role;
+        }
+        public void SetRole(EntityId roleId)
+        {
+            RoleId = roleId;
         }
     }
 }

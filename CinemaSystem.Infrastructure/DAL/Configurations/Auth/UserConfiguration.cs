@@ -40,6 +40,13 @@ namespace CinemaSystem.Infrastructure.DAL.Configurations.Auth
                 .HasConversion(x => x.Value, x => new Email(x))
                 .IsRequired()
                 .HasMaxLength(Email.MaxLenght);
+
+            builder.Property(x=>x.RoleId)
+                .HasConversion(x => x.Value, x => new EntityId(x));
+
+            builder.HasOne(x => x.Role)
+                .WithMany(x => x.Users)
+                .HasForeignKey(x => x.RoleId);
         }
     }
 }
