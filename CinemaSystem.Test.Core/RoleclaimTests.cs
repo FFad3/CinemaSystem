@@ -1,4 +1,5 @@
 using CinemaSystem.Core.Exceptions;
+using CinemaSystem.Core.ValueObjects.Auth;
 using CinemaSystem.Core.ValueObjects.Common;
 
 namespace CinemaSystem.Test.Core
@@ -52,7 +53,7 @@ namespace CinemaSystem.Test.Core
             const string newName = "";
             var claim = new RoleClaim(id, "Claim");
             //Act
-            Action act = () => claim.ChangeName(newName);
+            void act() => claim.ChangeName(newName);
             //Assert
             Assert.Throws<InvalidTextException>(() => act());
         }
@@ -87,14 +88,18 @@ namespace CinemaSystem.Test.Core
         public static IEnumerable<object[]> ValidRoleClaims()
         {
             yield return new object[] { "NewClaim" };
-            yield return new object[] { "x" };
-            yield return new object[] { "T T" };
+            yield return new object[] { "xxxx" };
+            yield return new object[] { "TTTt" };
+            yield return new object[] { new ClaimName("Test") };
         }
 
         public static IEnumerable<object[]> InvalidRoleClaims()
         {
-            yield return new object[] { "" };
             yield return new object[] { null! };
+            yield return new object[] { "" };
+            yield return new object[] { "x" };
+            yield return new object[] { "xx" };
+            yield return new object[] { "xxx" };
         }
     }
 }
