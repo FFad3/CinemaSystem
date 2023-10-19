@@ -1,4 +1,5 @@
-﻿using CinemaSystem.Core.Repositories.Auth;
+﻿using CinemaSystem.Application.Abstraction.Infrastructure;
+using CinemaSystem.Core.Repositories.Auth;
 using CinemaSystem.Infrastructure.DAL.Repositories;
 using CinemaSystem.Infrastructure.DAL.Repositories.Auth;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,7 @@ namespace CinemaSystem.Infrastructure.DAL
             if(!options.UseInMemory)
                 services.AddHostedService<DatabaseInitializer>();
 
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             return services;
