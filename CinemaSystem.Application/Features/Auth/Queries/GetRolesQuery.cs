@@ -5,7 +5,7 @@ using CinemaSystem.Core.Repositories.Auth;
 
 namespace CinemaSystem.Application.Features.Auth.Queries
 {
-    public sealed class GetRolesQuery : IQuery<IEnumerable<RoleDto>>
+    public sealed record GetRolesQuery : IQuery<IEnumerable<RoleDto>>
     {
     }
 
