@@ -1,4 +1,5 @@
 ﻿using CinemaSystem.Application.Abstraction.Infrastructure;
+using CinemaSystem.Infrastructure.Cache;
 using CinemaSystem.Infrastructure.DAL;
 using CinemaSystem.Infrastructure.Middlewares;
 using CinemaSystem.Infrastructure.RequestPipeline;
@@ -18,6 +19,8 @@ namespace CinemaSystem.Infrastructure
         {
             services.AddSeciurity(configuration);
             services.AddSql(configuration);
+
+            services.AddCache();
 
             services.AddSingleton<IClock, Clock>();
             services.AddHttpContextAccessor();

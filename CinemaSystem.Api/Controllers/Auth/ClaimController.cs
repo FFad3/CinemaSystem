@@ -1,5 +1,6 @@
 ﻿using CinemaSystem.Application.Features.Auth.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaSystem.Api.Controllers.Auth
@@ -15,6 +16,7 @@ namespace CinemaSystem.Api.Controllers.Auth
             _mediator = mediator;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

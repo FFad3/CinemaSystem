@@ -21,6 +21,6 @@ namespace CinemaSystem.Infrastructure.DAL.Repositories.Auth
             await _users.SingleOrDefaultAsync(x => x.Email == email, cancellationToken);
 
         public async Task<User?> GetByUsernameAsync(Username userName, CancellationToken cancellationToken) =>
-            await _users.SingleOrDefaultAsync(x => x.Username == userName, cancellationToken);
+            await _users.Include(x => x.Role).SingleOrDefaultAsync(x => x.Username == userName, cancellationToken);
     }
 }
