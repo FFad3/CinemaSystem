@@ -1,8 +1,13 @@
-﻿namespace CinemaSystem.Application.Abstraction.Infrastructure
+﻿using CinemaSystem.Application.Models.Auth;
+
+namespace CinemaSystem.Application.Abstraction.Infrastructure
 {
     public interface ITokenStorage
     {
-        void SetToken(string token);
-        string? GetToken();
+        void SetTokens(TokensPair tokensPair);
+        void SetAccesToken(Token token);
+        void SetRefreshToken(Token refreshToken);
+        Token? GetAccessToken();
+        Token? GetRefreshToken();
     }
 }
