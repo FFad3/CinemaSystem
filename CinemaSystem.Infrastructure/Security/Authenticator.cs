@@ -6,6 +6,7 @@ using CinemaSystem.Application.Models.Auth;
 using CinemaSystem.Core.Entities;
 using CinemaSystem.Core.Repositories.Auth;
 using CinemaSystem.Infrastructure.Security.TokenGenerators;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CinemaSystem.Infrastructure.Security
@@ -22,14 +23,14 @@ namespace CinemaSystem.Infrastructure.Security
 
         public Authenticator(AccessTokenGenerator accessTokenGenerator, RefreshTokenGenerator refreshTokenGenerator,
             IClock clock, ITokenStorage tokenStorage, ICacheService cacheService,
-            AuthenticationConfiguration configuration, IUserRepository userRepository)
+            IOptions<AuthenticationConfiguration> configuration, IUserRepository userRepository)
         {
             _accessTokenGenerator = accessTokenGenerator;
             _refreshTokenGenerator = refreshTokenGenerator;
             _clock = clock;
             _tokenStorage = tokenStorage;
             _cacheService = cacheService;
-            _configuration = configuration;
+            _configuration = configuration.Value;
             _userRepository = userRepository;
         }
 

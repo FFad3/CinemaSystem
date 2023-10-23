@@ -35,9 +35,16 @@ namespace CinemaSystem.Infrastructure.Security
                     ValidateIssuerSigningKey = true,
                     ClockSkew = TimeSpan.Zero
                 };
-            });
 
-            services.AddAuthentication();
+                x.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        context.Token = context.Request.Cookies[HttpContextTokenStorage.AccessTokenKey];
+                        return Task.CompletedTask;
+                    }
+                };
+            });
 
             services
                 .AddSingleton<TokenGenerator>()
@@ -46,7 +53,7 @@ namespace CinemaSystem.Infrastructure.Security
                 .AddTransient<IPasswordHasher<User>, PasswordHasher<User>>()
                 .AddTransient<IPasswordManager, PasswordManager>()
                 .AddTransient<ITokenStorage, HttpContextTokenStorage>()
-                .AddTransient<IAuthenticator, Authenticator>();
+                .AddScoped<IAuthenticator, Authenticator>();
             ;
 
             return services;
