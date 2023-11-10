@@ -9,15 +9,14 @@ namespace CinemaSystem.Core.ValueObjects.Auth
 
         public string Value { get; }
 
-        public RoleName(string claimName)
+        public RoleName(string roleName)
         {
-            if (!IsNameValid(claimName))
+            if (!IsNameValid(roleName))
             {
-                var propName = GetType().Name;
-                throw new InvalidTextException(propName, claimName);
+                throw new InvalidTextException(roleName);
             }
 
-            Value = claimName.ToUpper();
+            Value = roleName.ToUpper();
         }
 
         private static bool IsNameValid(string value)

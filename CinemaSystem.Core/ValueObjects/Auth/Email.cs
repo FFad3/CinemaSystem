@@ -13,19 +13,18 @@ namespace CinemaSystem.Core.ValueObjects.Auth
         public const int MinLenght = 3;
         public const int MaxLenght = 20;
         public string Value { get; }
-        public Email(string value)
+        public Email(string email)
         {
-            value = value?.ToLowerInvariant();
+            email = email?.ToLowerInvariant();
 
-            if (string.IsNullOrEmpty(value)
-                || value.Length is < MinLenght or > MaxLenght
-                || !Regex.IsMatch(value))
+            if (string.IsNullOrEmpty(email)
+                || email.Length is < MinLenght or > MaxLenght
+                || !Regex.IsMatch(email))
             {
-                var propName = GetType().Name;
-                throw new InvalidTextException(propName, value);
+                throw new InvalidTextException(email);
             }
 
-            Value = value;
+            Value = email;
         }
 
         public static implicit operator string(Email value) => value.Value;

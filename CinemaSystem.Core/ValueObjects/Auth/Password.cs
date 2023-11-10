@@ -7,14 +7,13 @@ namespace CinemaSystem.Core.ValueObjects.Auth
         public const int MinLenght = 6;
         public const int MaxLenght = 200;
         public string Value { get; }
-        public Password(string value)
+        public Password(string password)
         {
-            if (string.IsNullOrEmpty(value) || value.Length is < MinLenght or > MaxLenght)
+            if (string.IsNullOrEmpty(password) || password.Length is < MinLenght or > MaxLenght)
             {
-                var propName = GetType().Name;
-                throw new InvalidTextException(propName, value);
+                throw new InvalidTextException(password);
             }
-            Value = value;
+            Value = password;
         }
 
         public static implicit operator string(Password value) => value.Value;

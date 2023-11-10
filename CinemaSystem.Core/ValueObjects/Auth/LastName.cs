@@ -7,15 +7,14 @@ namespace CinemaSystem.Core.ValueObjects.Auth
         public const int MinLenght = 3;
         public const int MaxLenght = 20;
         public string Value { get; }
-        public LastName(string value)
+        public LastName(string lastName)
         {
-            if (string.IsNullOrEmpty(value) || value.Length is < MinLenght or > MaxLenght)
+            if (string.IsNullOrEmpty(lastName) || lastName.Length is < MinLenght or > MaxLenght)
             {
-                var propName = GetType().Name;
-                throw new InvalidTextException(propName, value);
+                throw new InvalidTextException(lastName);
             }
 
-            Value = value;
+            Value = lastName;
         }
 
         public static implicit operator string(LastName value) => value.Value;

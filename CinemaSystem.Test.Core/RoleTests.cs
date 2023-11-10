@@ -24,5 +24,6 @@ namespace CinemaSystem.Test.Core
             yield return new object[] { "role" };
             yield return new object[] { "T  T" };
         }
+
     }
 }

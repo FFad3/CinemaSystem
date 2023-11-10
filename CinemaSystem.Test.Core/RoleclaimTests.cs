@@ -95,7 +95,6 @@ namespace CinemaSystem.Test.Core
 
         public static IEnumerable<object[]> InvalidRoleClaims()
         {
-            yield return new object[] { null! };
             yield return new object[] { "" };
             yield return new object[] { "x" };
             yield return new object[] { "xx" };

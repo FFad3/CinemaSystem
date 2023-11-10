@@ -13,8 +13,7 @@ namespace CinemaSystem.Core.ValueObjects.Auth
         {
             if (!IsNameValid(claimName))
             {
-                var propName = GetType().Name;
-                throw new InvalidTextException(propName, claimName);
+                throw new InvalidTextException(claimName);
             }
 
             Value = claimName.ToUpper();
