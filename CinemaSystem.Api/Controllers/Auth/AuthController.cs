@@ -1,6 +1,8 @@
-﻿using CinemaSystem.Application.Features.Auth.Commands.SignIn;
+﻿using CinemaSystem.Application.Features.Auth.Commands.LogOut;
+using CinemaSystem.Application.Features.Auth.Commands.SignIn;
 using CinemaSystem.Application.Features.Auth.Commands.SignUp;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaSystem.Api.Controllers.Auth
@@ -16,6 +18,7 @@ namespace CinemaSystem.Api.Controllers.Auth
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -25,6 +28,7 @@ namespace CinemaSystem.Api.Controllers.Auth
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -35,6 +39,16 @@ namespace CinemaSystem.Api.Controllers.Auth
             return Ok();
         }
 
+        [Authorize]
+        [HttpPost("logout")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> LogOut()
+        {
+            await _mediator.Send(new LogOut());
+            return Ok();
+        }
+
+        //[Authorize]
         //[HttpPost("refresh-token")]
         //public async Task<IActionResult> RefreshToken()
         //{

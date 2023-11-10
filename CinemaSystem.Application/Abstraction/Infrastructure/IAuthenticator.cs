@@ -7,5 +7,6 @@ namespace CinemaSystem.Application.Abstraction.Infrastructure
     {
         public Task<TokensPair> Authenticate(User user, CancellationToken cancellationToken);
         public Task<TokensPair> RefreshSession(CancellationToken cancellationToken);
+        public Task RemoveSession(CancellationToken cancellationToken = default);
     }
 }

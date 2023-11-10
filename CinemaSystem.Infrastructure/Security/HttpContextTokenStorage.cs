@@ -17,26 +17,37 @@ namespace CinemaSystem.Infrastructure.Security
 
         public Token? GetAccessToken()
         {
-            return _httpContextAccessor.HttpContext.Request.Cookies[AccessTokenKey];
-        }
-        public Token? GetRefreshToken()
-        {
-            return _httpContextAccessor.HttpContext.Request.Cookies[RefreshTokenKey];
-        }
-        public void SetRefreshToken(Token refreshToken)
-        {
-            _httpContextAccessor.HttpContext.Response.Cookies.Append(RefreshTokenKey, refreshToken);
+            _httpContextAccessor.HttpContext.Request.Cookies.TryGetValue(AccessTokenKey, out string? accessToken);
+            return accessToken;
         }
 
-        public void SetAccesToken(Token token)
+        public Token? GetRefreshToken()
         {
-            _httpContextAccessor.HttpContext.Response.Cookies.Append(AccessTokenKey, token);
+            _httpContextAccessor.HttpContext.Request.Cookies.TryGetValue(RefreshTokenKey, out string? refreshToken);
+            return refreshToken;
+        }
+
+        public void SetToken(string cookieName, TokenDetails tokenDetails)
+        {
+            var options = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = tokenDetails.ExpirationDate
+            };
+
+            _httpContextAccessor.HttpContext.Response.Cookies.Append(cookieName, tokenDetails.Token, options);
         }
 
         public void SetTokens(TokensPair tokensPair)
         {
-            SetAccesToken(tokensPair.AccessTokenDetails.Token);
-            SetRefreshToken(tokensPair.RefreshTokenDetails.Token);
+            SetToken(AccessTokenKey, tokensPair.AccessTokenDetails);
+            SetToken(RefreshTokenKey, tokensPair.RefreshTokenDetails);
+        }
+
+        public void ClearTokens()
+        {
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete(AccessTokenKey);
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete(RefreshTokenKey);
         }
     }
 }

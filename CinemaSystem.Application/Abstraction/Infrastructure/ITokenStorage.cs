@@ -5,8 +5,8 @@ namespace CinemaSystem.Application.Abstraction.Infrastructure
     public interface ITokenStorage
     {
         void SetTokens(TokensPair tokensPair);
-        void SetAccesToken(Token token);
-        void SetRefreshToken(Token refreshToken);
+        void SetToken(string cookieName, TokenDetails tokenDetails);
+        void ClearTokens();
         Token? GetAccessToken();
         Token? GetRefreshToken();
     }
