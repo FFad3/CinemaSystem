@@ -4,7 +4,8 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "cinemasystem.api": "StartDebugging"
+        "cinemasystem.api": "DoNotStart",
+        "cinemasystem-db": "StartWithoutDebugging"
       }
     }
   }

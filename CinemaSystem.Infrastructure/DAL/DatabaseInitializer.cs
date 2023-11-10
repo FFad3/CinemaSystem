@@ -86,23 +86,22 @@ namespace CinemaSystem.Infrastructure.DAL
                 await dbContext.SaveChangesAsync(cancellationToken);
             }
         }
+
         private static async Task AddAccounts(CinemaSystemDbContext dbContext, CancellationToken cancellationToken)
         {
             //All password zaq1@WSX
             if (!await dbContext.Users.AnyAsync(x => x.Username == new Username("admin"), cancellationToken))
             {
-                var user = new User(EntityId.Generate(), "admin", "AQAAAAIAAYagAAAAECOqM8aYrbG0U7jnTZTmk4+QYv53sIUdUr27Is3E/WGVTyBekVXSqnxnLT5rwxHIuQ==\r\n", "first_name", "last_name", "admin@gmail.com");
-                Role role = await dbContext.Roles.FirstOrDefaultAsync(x => x.RoleName == new RoleName("admin"), cancellationToken);
-                user.SetRole(role);
+                var role = await dbContext.Roles.FirstOrDefaultAsync(x => x.RoleName == new RoleName("admin"), cancellationToken);
+                var user = new User(EntityId.Generate(), "admin", "AQAAAAIAAYagAAAAECOqM8aYrbG0U7jnTZTmk4+QYv53sIUdUr27Is3E/WGVTyBekVXSqnxnLT5rwxHIuQ==\r\n", "first_name", "last_name", "admin@gmail.com", role.Id);
                 await dbContext.AddAsync(user, cancellationToken);
                 await dbContext.SaveChangesAsync(cancellationToken);
             }
 
             if (!await dbContext.Users.AnyAsync(x => x.Username == new Username("user"), cancellationToken))
             {
-                var user = new User(EntityId.Generate(), "user", "AQAAAAIAAYagAAAAECOqM8aYrbG0U7jnTZTmk4+QYv53sIUdUr27Is3E/WGVTyBekVXSqnxnLT5rwxHIuQ==\r\n", "first_name", "last_name", "user@gmail.com");
                 var role = await dbContext.Roles.FirstOrDefaultAsync(x => x.RoleName == new RoleName("user"), cancellationToken);
-                user.SetRole(role);
+                var user = new User(EntityId.Generate(), "user", "AQAAAAIAAYagAAAAECOqM8aYrbG0U7jnTZTmk4+QYv53sIUdUr27Is3E/WGVTyBekVXSqnxnLT5rwxHIuQ==\r\n", "first_name", "last_name", "user@gmail.com", role.Id);
                 await dbContext.AddAsync(user, cancellationToken);
                 await dbContext.SaveChangesAsync(cancellationToken);
             }

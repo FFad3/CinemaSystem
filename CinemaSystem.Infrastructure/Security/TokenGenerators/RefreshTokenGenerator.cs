@@ -1,4 +1,5 @@
-﻿using CinemaSystem.Application.Models.Auth;
+﻿using CinemaSystem.Application.Abstraction.Infrastructure;
+using CinemaSystem.Application.Models.Auth;
 using Microsoft.Extensions.Options;
 
 namespace CinemaSystem.Infrastructure.Security.TokenGenerators
@@ -7,15 +8,18 @@ namespace CinemaSystem.Infrastructure.Security.TokenGenerators
     {
         private readonly AuthenticationConfiguration _configuration;
         private readonly TokenGenerator _tokenGenerator;
+        private readonly IClock _clock;
 
-        public RefreshTokenGenerator(IOptions<AuthenticationConfiguration> configuration, TokenGenerator tokenGenerator)
+        public RefreshTokenGenerator(IOptions<AuthenticationConfiguration> configuration, TokenGenerator tokenGenerator, IClock clock)
         {
             _configuration = configuration.Value;
             _tokenGenerator = tokenGenerator;
+            _clock = clock;
         }
 
-        public TokenDetails GenerateToken(DateTime now)
+        public TokenDetails GenerateToken()
         {
+            var now = _clock.Current();
             var expirationTime = now.AddMinutes(_configuration.RefreshTokenExpirationInMinutes);
 
             var accesToken = _tokenGenerator.GenerateToken(
